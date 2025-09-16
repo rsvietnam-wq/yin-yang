@@ -6,25 +6,31 @@
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
       background: #f0f0f0;
+      font-family: sans-serif;
     }
     svg {
       width: 300px;
       height: 300px;
-      animation: spin 20s linear infinite;
+      animation: spin linear infinite;
+      animation-duration: 20s; /* mặc định */
     }
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    .controls {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <svg id="yinYang" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <!-- Vòng ngoài -->
     <circle cx="50" cy="50" r="50" fill="black"/>
     
@@ -40,5 +46,20 @@
     <!-- Chấm trắng -->
     <circle cx="50" cy="75" r="5" fill="white"/>
   </svg>
+
+  <div class="controls">
+    <label for="speed">Speed:</label>
+    <input type="range" id="speed" min="1" max="50" value="20">
+  </div>
+
+  <script>
+    const yinYang = document.getElementById("yinYang");
+    const speedControl = document.getElementById("speed");
+
+    speedControl.addEventListener("input", () => {
+      const val = speedControl.value;
+      yinYang.style.animationDuration = val + "s";
+    });
+  </script>
 </body>
 </html>
