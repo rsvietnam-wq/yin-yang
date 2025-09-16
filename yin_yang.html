@@ -2,64 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Yin Yang Symbol</title>
+  <title>Yin Yang</title>
   <style>
     body {
+      background: #111;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: #f0f0f0;
-      font-family: sans-serif;
+      color: white;
+      font-family: "Arial Black", sans-serif;
     }
-    svg {
-      width: 300px;
-      height: 300px;
-      animation: spin linear infinite;
-      animation-duration: 20s; /* mặc định */
+
+    h1 {
+      font-size: 64px;
+      margin-bottom: 20px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px #fff, 0 0 40px #888;
     }
+
+    .yin-yang {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, black 50%, white 50%);
+      position: relative;
+      animation: spin 10s linear infinite;
+    }
+
+    .yin-yang::before,
+    .yin-yang::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .yin-yang::before {
+      top: 0;
+      background: white;
+      box-shadow: 0 100px 0 0 black;
+    }
+
+    .yin-yang::after {
+      top: 0;
+      background: radial-gradient(circle, black 25%, white 25%);
+      box-shadow: 0 100px 0 0 white;
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    .controls {
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
-  <svg id="yinYang" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <!-- Vòng ngoài -->
-    <circle cx="50" cy="50" r="50" fill="black"/>
-    
-    <!-- Nửa trắng -->
-    <path d="M50,0
-             A25,25 0 0,0 50,50
-             A25,25 0 0,1 50,100
-             A50,50 0 0,1 50,0Z" fill="white"/>
-    
-    <!-- Chấm đen -->
-    <circle cx="50" cy="25" r="5" fill="black"/>
-    
-    <!-- Chấm trắng -->
-    <circle cx="50" cy="75" r="5" fill="white"/>
-  </svg>
-
-  <div class="controls">
-    <label for="speed">Speed:</label>
-    <input type="range" id="speed" min="1" max="50" value="20">
-  </div>
-
-  <script>
-    const yinYang = document.getElementById("yinYang");
-    const speedControl = document.getElementById("speed");
-
-    speedControl.addEventListener("input", () => {
-      const val = speedControl.value;
-      yinYang.style.animationDuration = val + "s";
-    });
-  </script>
+  <h1>TROC TEMPLE</h1>
+  <div class="yin-yang"></div>
 </body>
 </html>
