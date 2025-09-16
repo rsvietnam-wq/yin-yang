@@ -1,59 +1,44 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Âm Dương (Taijitu)</title>
+  <meta charset="UTF-8">
+  <title>Yin Yang Symbol</title>
   <style>
-    :root{ --size:360px }
-    html,body{ height:100%; margin:0; display:flex; align-items:center; justify-content:center; background:#f6f6f8; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
-    .frame{ width:var(--size); height:var(--size); display:flex; align-items:center; justify-content:center }
-    .taiji{ width:100%; height:100%; animation:spin 8s linear infinite }
-    @keyframes spin{ to{ transform:rotate(360deg) } }
-    .controls{ position:fixed; right:18px; top:18px; background:rgba(255,255,255,0.9); padding:8px 10px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.08) }
-    .controls label{ font-size:13px; display:flex; gap:8px; align-items:center }
-    .controls input[type=range]{ width:140px }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    svg {
+      width: 300px;
+      height: 300px;
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
-  <div class="frame">
-    <svg class="taiji" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hình âm dương">
-      <!-- nền trắng toàn bộ -->
-      <circle cx="100" cy="100" r="100" fill="#fff" />
-      <!-- nửa đen bên trái -->
-      <path d="M100,0 A100,100 0 0 0 100,200 A50,50 0 0 1 100,0 Z" fill="#111"/>
-      <!-- nửa trắng bên phải (đã có từ nền) -->
-
-      <!-- vòng tròn nhỏ màu đen trong nửa trắng -->
-      <circle cx="100" cy="50" r="25" fill="#111" />
-      <!-- vòng tròn nhỏ màu trắng trong nửa đen -->
-      <circle cx="100" cy="150" r="25" fill="#fff" />
-
-      <!-- chấm trắng trong vòng tròn đen -->
-      <circle cx="100" cy="50" r="7.5" fill="#fff" />
-      <!-- chấm đen trong vòng tròn trắng -->
-      <circle cx="100" cy="150" r="7.5" fill="#111" />
-
-      <circle cx="100" cy="100" r="100" fill="none" stroke="#222" stroke-width="1" opacity="0.08" />
-    </svg>
-  </div>
-
-  <div class="controls">
-    <label>
-      <span>Speed</span>
-      <input id="speed" type="range" min="0" max="20" value="8">
-    </label>
-  </div>
-
-  <script>
-    const svg = document.querySelector('.taiji');
-    const range = document.getElementById('speed');
-    function setSpeed(v){
-      if(+v === 0){ svg.style.animation = 'none'; return }
-      svg.style.animation = `spin ${ (24/ v).toFixed(3) }s linear infinite`;
-    }
-    setSpeed(range.value);
-    range.addEventListener('input', e=> setSpeed(e.target.value));
-  </script>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Vòng ngoài -->
+    <circle cx="50" cy="50" r="50" fill="black"/>
+    
+    <!-- Nửa trắng -->
+    <path d="M50,0
+             A25,25 0 0,0 50,50
+             A25,25 0 0,1 50,100
+             A50,50 0 0,1 50,0Z" fill="white"/>
+    
+    <!-- Chấm đen -->
+    <circle cx="50" cy="25" r="5" fill="black"/>
+    
+    <!-- Chấm trắng -->
+    <circle cx="50" cy="75" r="5" fill="white"/>
+  </svg>
 </body>
 </html>
