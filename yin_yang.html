@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Âm Dương (Taijitu) — Không dùng ảnh</title>
+  <style>
+    :root{ --size:360px }
+    html,body{ height:100%; margin:0; display:flex; align-items:center; justify-content:center; background:#f6f6f8; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
+    .frame{ width:var(--size); height:var(--size); display:flex; align-items:center; justify-content:center }
+    /* rotation animation */
+    .taiji{ width:100%; height:100%; animation:spin 8s linear infinite }
+    @keyframes spin{ to{ transform:rotate(360deg) } }
+    /* simple controls */
+    .controls{ position:fixed; right:18px; top:18px; background:rgba(255,255,255,0.9); padding:8px 10px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.08) }
+    .controls label{ font-size:13px; display:flex; gap:8px; align-items:center }
+    .controls input[type=range]{ width:140px }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <!-- Pure SVG Taijitu (no external images) -->
+    <svg class="taiji" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hình âm dương">
+      <!-- background circle (base) -->
+      <circle cx="100" cy="100" r="100" fill="#111" />
+
+      <!-- the S-shaped white area made from two arcs -->
+      <path d="M100 0 A100 100 0 0 1 100 200 A50 50 0 0 0 100 0 Z" fill="#fff"/>
+
+      <!-- two small 'tadpole' circles -->
+      <circle cx="100" cy="50" r="25" fill="#111" />
+      <circle cx="100" cy="150" r="25" fill="#fff" />
+
+      <!-- the little dots inside them -->
+      <circle cx="100" cy="50" r="7.5" fill="#fff" />
+      <circle cx="100" cy="150" r="7.5" fill="#111" />
+
+      <!-- decorative thin outline -->
+      <circle cx="100" cy="100" r="100" fill="none" stroke="#222" stroke-width="1" opacity="0.08" />
+    </svg>
+  </div>
+
+  <div class="controls">
+    <label>
+      <span>Speed</span>
+      <input id="speed" type="range" min="0" max="20" value="8">
+    </label>
+  </div>
+
+  <script>
+    // small script to control rotation speed (no external libs)
+    const svg = document.querySelector('.taiji');
+    const range = document.getElementById('speed');
+    function setSpeed(v){
+      if(+v === 0){ svg.style.animation = 'none'; return }
+      svg.style.animation = `spin ${ (24/ v).toFixed(3) }s linear infinite`;
+    }
+    setSpeed(range.value);
+    range.addEventListener('input', e=> setSpeed(e.target.value));
+  </script>
+</body>
+</html>
